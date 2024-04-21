@@ -49,4 +49,29 @@ public class AddressController {
     public void deleteAddress(@PathVariable int id) {
         addressRepository.deleteAddress(id);
     }
+
+    @GetMapping("/search")
+    public List<Address> search(@RequestParam(value = "name", defaultValue = "") String name,
+                                @RequestParam(value = "street", defaultValue = "") String street) throws Exception {
+
+        if (!name.isEmpty() && !street.isEmpty()) {
+            return addressRepository.getAddressBook().stream()
+                    .filter(address -> (address.firstName().contains(name) || address.lastName().contains(name)) && address.street().contains(street))
+                    .toList();
+        }
+
+        if (!name.isEmpty() && street.isEmpty()) {
+            return addressRepository.getAddressBook().stream()
+                    .filter(address -> address.firstName().contains(name) || address.lastName().contains(name))
+                    .toList();
+        }
+
+        if (name.isEmpty() && !street.isEmpty()) {
+            return addressRepository.getAddressBook().stream()
+                    .filter(address -> address.street().contains(street))
+                    .toList();
+        }
+
+        return addressRepository.getAddressBook();
+    }
 }

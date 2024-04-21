@@ -6,7 +6,7 @@ public record Address(
         String firstName,
         String lastName,
         String companyName,
-        String address,
+        String street,
         long tlf,
         String email,
         long mobileNum,
