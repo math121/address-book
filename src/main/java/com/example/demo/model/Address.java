@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+//TODO Add validation here
 public record Address(
         int id,
         String firstName,

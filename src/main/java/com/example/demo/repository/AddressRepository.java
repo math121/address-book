@@ -29,22 +29,22 @@ public class AddressRepository {
         return addressBook;
     }
 
-    public Address findById(int id) {
+    public Address getAddressById(int id) {
         return addressBook.stream().filter(address -> address.id() == id).findFirst().orElseThrow();
     }
 
-    public Address create(Address address) {
+    public Address createAddress(Address address) {
         addressBook.add(address);
         return address;
     }
 
-    public void update(Address address, int id) {
+    public void updateAddress(Address address, int id) {
         Address existingAddress = addressBook.stream().filter(add -> add.id() == id).findFirst().orElseThrow();
         int index = addressBook.indexOf(existingAddress);
         addressBook.set(index, address);
     }
 
-    public void delete(int id) {
+    public void deleteAddress(int id) {
         addressBook.removeIf(address -> address.id() == id);
     }
 }
