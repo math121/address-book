@@ -57,19 +57,22 @@ public class AddressController {
 
         if (!name.isEmpty() && !street.isEmpty()) {
             return addressRepository.getAddressBook().stream()
-                    .filter(address -> (address.firstName().contains(name) || address.lastName().contains(name)) && address.street().contains(street))
+                    .filter(address -> (address.firstName().toLowerCase().contains(name.toLowerCase()) ||
+                            address.lastName().toLowerCase().contains(name.toLowerCase()))
+                            && address.street().toLowerCase().contains(street.toLowerCase()))
                     .toList();
         }
 
         if (!name.isEmpty() && street.isEmpty()) {
             return addressRepository.getAddressBook().stream()
-                    .filter(address -> address.firstName().contains(name) || address.lastName().contains(name))
+                    .filter(address -> address.firstName().toLowerCase().contains(name.toLowerCase()) ||
+                            address.lastName().toLowerCase().contains(name.toLowerCase()))
                     .toList();
         }
 
         if (name.isEmpty() && !street.isEmpty()) {
             return addressRepository.getAddressBook().stream()
-                    .filter(address -> address.street().contains(street))
+                    .filter(address -> address.street().toLowerCase().contains(street.toLowerCase()))
                     .toList();
         }
 
