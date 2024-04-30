@@ -9,8 +9,8 @@ public record Address(
         String street,
         long tlf,
         String email,
-        long mobileNum,
-        long faxNum
+        long mobile,
+        long fax
 ) {
 
 }
